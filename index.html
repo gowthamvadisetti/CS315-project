@@ -1,16 +1,35 @@
 <!DOCTYPE html>
 <html>
+<head>
+	<style>
+        table, th, td 
+        {
+            margin:10px 0;
+            border:solid 1px #333;
+            padding:2px 4px;
+            font:15px Verdana;
+        }
+        th {
+            font-weight:bold;
+        }
+    </style>
+</head>
 <body>
 
-<!-- <form action="/action_page.php">
+<h1>Update</h1>
   First name:<br>
-  <input type="text" name="firstname" value="Mickey">
+  <input type="text" id ="first" name="firstname" value="Mickey">
   <br>
   Last name:<br>
-  <input type="text" name="lastname" value="Mouse">
+  <input type="text" id ="second" name="lastname" value="Mouse">
   <br><br>
-  <input type="submit" value="Submit">
-</form>  -->
+  <input type="submit" value="Submit" onclick="updateDB()">
+
+
+<h1>View</h1>
+<input type="button" value="Submit" onclick="viewDB()">
+
+<div id="showData"></div>
 
 <!-- <p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
  -->
@@ -18,10 +37,72 @@
 
  <script type="text/javascript" src="LocalStorageDB.js"></script>
  <script type="text/javascript">
- 	var DB = new LocalStorageDB('my_first_database');
- 	DB.CREATE( 'my_first_table', { id: 0, foo: 'bar', test: 'ing' } );
- 	DB.INSERT_INTO( 'my_first_table', [{test:'ed'},{foo:'bat'}] );
+ 	 var DB = new LocalStorageDB('my_first_database');
+ 	// DB.CREATE( 'my_first_table', { id: 0, foo: 'bar', test: 'ing' } );
+ 	// DB.INSERT_INTO( 'my_first_table', [{test:'ed'},{foo:'bat'}] );
  	console.log(DB.SELECT( 'my_first_table' ));
  </script>
+
+ <script type="text/javascript">
+ 	function updateDB()
+ 	{
+ 		var first_name=document.getElementById('first').value;
+ 		var second_name=document.getElementById('second').value;
+ 		DB.INSERT_INTO( 'my_first_table', [{foo:first_name},{test:second_name}] );
+ 	}
+ 	function viewDB() {
+ 		var table=DB.SELECT( 'my_first_table' );
+ 		CreateTableFromJSON(table);
+ 		// body...
+ 	}
+ </script>
+
+ <script>
+    function CreateTableFromJSON(table) {
+        var myBooks = table;
+
+        // EXTRACT VALUE FOR HTML HEADER. 
+        // ('Book ID', 'Book Name', 'Category' and 'Price')
+        var col = [];
+        for (var i = 0; i < myBooks.length; i++) {
+            for (var key in myBooks[i]) {
+                if (col.indexOf(key) === -1) {
+                    col.push(key);
+                }
+            }
+        }
+
+        // CREATE DYNAMIC TABLE.
+        var table = document.createElement("table");
+
+        // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
+
+        var tr = table.insertRow(-1);                   // TABLE ROW.
+
+        for (var i = 0; i < col.length; i++) {
+            var th = document.createElement("th");      // TABLE HEADER.
+            th.innerHTML = col[i];
+            tr.appendChild(th);
+        }
+
+        // ADD JSON DATA TO THE TABLE AS ROWS.
+        for (var i = 0; i < myBooks.length; i++) {
+
+            tr = table.insertRow(-1);
+
+            for (var j = 0; j < col.length; j++) {
+                var tabCell = tr.insertCell(-1);
+                tabCell.innerHTML = myBooks[i][col[j]];
+            }
+        }
+
+        // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+        var divContainer = document.getElementById("showData");
+        divContainer.innerHTML = "";
+        divContainer.appendChild(table);
+    }
+</script>
+
+
 </body>
 </html>
