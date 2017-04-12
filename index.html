@@ -37,6 +37,13 @@
 
  <script type="text/javascript" src="LocalStorageDB.js"></script>
  <script type="text/javascript">
+
+ 	//This is where we should GET the data from the server
+ 	function getDB()
+ 	{
+
+ 	}
+
  	 var DB = new LocalStorageDB('my_first_database');
  	// DB.CREATE( 'my_first_table', { id: 0, foo: 'bar', test: 'ing' } );
  	// DB.INSERT_INTO( 'my_first_table', [{test:'ed'},{foo:'bat'}] );
@@ -48,7 +55,7 @@
  	{
  		var first_name=document.getElementById('first').value;
  		var second_name=document.getElementById('second').value;
- 		DB.INSERT_INTO( 'my_first_table', [{foo:first_name},{test:second_name}] );
+ 		DB.INSERT_INTO( 'my_first_table', [{foo:first_name,test:second_name}] );
  	}
  	function viewDB() {
  		var table=DB.SELECT( 'my_first_table' );
@@ -101,6 +108,16 @@
         divContainer.innerHTML = "";
         divContainer.appendChild(table);
     }
+
+
+    //This is where we should POST the data to the server
+ 	function postDB()
+ 	{
+
+ 	}
+
+
+
 </script>
 
 
