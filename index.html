@@ -18,10 +18,10 @@
 
 <h1>Update</h1>
   First name:<br>
-  <input type="text" id ="first" name="firstname" value="Mickey">
+  <input type="text" id ="first" name="firstname">
   <br>
   Last name:<br>
-  <input type="text" id ="second" name="lastname" value="Mouse">
+  <input type="text" id ="second" name="lastname">
   <br><br>
   <input type="submit" value="Submit" onclick="updateDB()">
 
@@ -48,9 +48,7 @@
  	// DB.CREATE( 'my_first_table', { id: 0, foo: 'bar', test: 'ing' } );
  	// DB.INSERT_INTO( 'my_first_table', [{test:'ed'},{foo:'bat'}] );
  	console.log(DB.SELECT( 'my_first_table' ));
- </script>
 
- <script type="text/javascript">
  	function updateDB()
  	{
  		var first_name=document.getElementById('first').value;
@@ -60,11 +58,7 @@
  	function viewDB() {
  		var table=DB.SELECT( 'my_first_table' );
  		CreateTableFromJSON(table);
- 		// body...
  	}
- </script>
-
- <script>
     function CreateTableFromJSON(table) {
         var myBooks = table;
 

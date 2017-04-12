@@ -549,6 +549,11 @@ License:       MIT License (see homepage)
 			}
 		};
 
+		this.JOIN = function( table1,table2)
+		{
+			
+		}
+
 	 	/**
 		 * LocalStorageDB.SELECT( table, criteria ) -> array
 		 * Selects rows from a given table based on the supplied criteria
