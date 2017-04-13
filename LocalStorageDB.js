@@ -549,36 +549,23 @@ License:       MIT License (see homepage)
 			}
 		};
 
-		this.JOIN = function( table1,table2)
+		this.JOIN = function(primary, foreign, primaryKey, foreignKey, select)
 		{
-			if (!Array.prototype.joinWith) {
-    +function () {
-        Array.prototype.joinWith = function(that, by, select, omit) {
-            var together = [], length = 0;
-            if (select) select.map(function(x){select[x] = 1;});
-            function fields(it) {
-                var f = {}, k;
-                for (k in it) {
-                    if (!select) { f[k] = 1; continue; }
-                    if (omit ? !select[k] : select[k]) f[k] = 1;
-                }
-                return f;
-            }
-            function add(it) {
-                var pkey = '.'+it[by], pobj = {};
-                if (!together[pkey]) together[pkey] = pobj,
-                    together[length++] = pobj;
-                pobj = together[pkey];
-                for (var k in fields(it))
-                    pobj[k] = it[k];
-            }
-            this.map(add);
-            that.map(add);
-            return together;
-        }
-    }();
-}
-		}
+			var m = primary.length, n = foreign.length, index = [], c = [];
+
+    		for (var i = 0; i < m; i++) {     // loop through m items
+        		var row = primary[i];
+        		index[row[primaryKey]] = row; // create an index for primary table
+    		}		
+
+    		for (var j = 0; j < n; j++) {     // loop through n items
+        		var y = foreign[j];
+        		var x = index[y[foreignKey]]; // get corresponding row from primary
+        		c.push(select(x, y));         // select only the columns you need
+    		}
+
+    		return c;
+		};
 
 	 	/**
 		 * LocalStorageDB.SELECT( table, criteria ) -> array
