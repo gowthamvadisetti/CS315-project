@@ -1,3 +1,20 @@
+Update --> primary key check (similar to Insert)
+
 UI
-Update --> primary key
-Join
+----
+
+Add operations similar to Join like Crossproduct,Intersection,Union etc.,
+
+Add UI elelments for showing join,select,update and other functions.
+
+Show working of POST and GET requests working in UI.
+
+check for borderline cases and errors.
+
+window.onbeforeunload make it working properly without errors
+
+Order the code properly
+
+Add readme 
+
+if possible Automate process and show performance difference b/w them
