@@ -31,7 +31,7 @@
 				First name:<br>
 				<input type="text" id ="first" name="firstname">
 				<br>
-				Last name:<br>
+				Email:<br>
 				<input type="text" id ="email" name="email">
 				<br><br>
 				<input type="submit" value="Submit" onclick="updateDB()">
@@ -48,14 +48,20 @@
 	<!-- <div class="row"> -->
 		<table class="table table-striped" id="ServerDBtable"></table>
 		<!-- </div> -->
+		<p>Below asdfasdbnm </p>
+		<table class="table table-striped" id="demo1"></table>
 	</div>
 
 
-<div id="demo"></div>
+	<div id="demo"></div>
+	<button onclick="postDB()">Post</button>
+	<!-- <p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
+	 -->
+ 	<div class="container">
+		<p>Below POST KA HE</p>
+		<table class="table table-striped" id="demo2"></table>
+	</div>
 
-<button onclick="postDB()"></button>
-<!-- <p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
- -->
 <p id="msg"></p>
 
  <script type="text/javascript" src="LocalStorageDB.js"></script>
@@ -70,10 +76,11 @@
 	// DB.DROP( 'temp')
 	// DB.DROP( 'my_first_table');
 	// DB.DROP( 'my_second_table');
-	DB.DROP('users');
+	//DB.DROP('newU');
 
 	function getDB()
 	{
+		DB.DROP('newU');
 		//GET JSON
 		// var table=DB.SELECT( 'my_first_table' );
 
@@ -81,18 +88,19 @@
 
 		xmlhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-				document.getElementById("demo").innerHTML =
-				this.responseText;
+				//document.getElementById("demo").innerHTML =
+				//this.responseText;
 				// console.log(this.responseText);
 			var json_input=JSON.parse(this.responseText);
-			console.log(json_input);
-			DB.CREATE( 'users', {id: 0, name: "DARTH VADER", email: "force@dark.com"},function (a) {
+			//CreateTableFromJSON(json_input,'demo1')
+			//console.log(json_input);
+			DB.CREATE( 'newU', {id: 0, name: "DARTH VADER", email: "force@dark.com"},function (a) {
 			return {
 			email: a.email,
 			};});
 
-			DB.INSERT_INTO('users',json_input);
-			console.log(DB.SELECT('users'));
+			DB.INSERT_INTO('newU',json_input);
+			console.log(DB.SELECT('newU'));
 			}
 		};
 
@@ -123,13 +131,13 @@
 	{
 		var first_name=document.getElementById('first').value;
 		var email=document.getElementById('email').value;
-		DB.INSERT_INTO( 'users', [{name:first_name,email:email}] );
+		DB.INSERT_INTO( 'newU', [{name:first_name,email:email}] );
 	}
 	function viewDB() {
-		var table=DB.SELECT( 'users' );
-		CreateTableFromJSON(table);
+		var table=DB.SELECT( 'newU' );
+		CreateTableFromJSON(table, 'ServerDBtable');
 	}
-	function CreateTableFromJSON(table) {
+	function CreateTableFromJSON(table, gid) {
 		var myBooks = table;
 
 		// EXTRACT VALUE FOR HTML HEADER. 
@@ -144,7 +152,7 @@
 		}
 
 		// CREATE DYNAMIC TABLE.
-		var table = document.getElementById("ServerDBtable");
+		var table = document.getElementById(gid);
 		table.innerHTML = "";
 		//var table = document.createElement("table")
 		// CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
@@ -202,17 +210,19 @@
 		xmlhttp.onreadystatechange = function() {
 	
 			if (this.readyState == 4 && this.status == 200) {
-				document.getElementById("demo").innerHTML =
-				this.responseText;
+				//document.getElementById("demo").innerHTML =
+				//this.responseText;
+				var input = JSON.parse(this.responseText);
+				CreateTableFromJSON(input,'demo1');
 			}
 		};
 
 
 		xmlhttp.open("POST", "http://34.209.252.152/star");
 		xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-		console.log(DB.SELECT('users'))
-		xmlhttp.send(JSON.stringify(DB.SELECT('users')));
-		//DB.DROP('users');
+		//console.log(DB.SELECT('newU'));
+		xmlhttp.send(JSON.stringify(DB.SELECT('newU')));
+		//DB.DROP('newU');
 
 
 	}

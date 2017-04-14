@@ -6,7 +6,7 @@ import json
 
 app = Flask(__name__)
 
-app.config['MONGO_DBNAME'] = 'users'
+app.config['MONGO_DBNAME'] = 'newU'
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/users'
 
 mongo = PyMongo(app)
