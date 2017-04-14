@@ -46,8 +46,24 @@
  	function getDB()
  	{
  		//GET JSON
+        // var table=DB.SELECT( 'my_first_table' );
 
+        var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("demo").innerHTML =
+                this.responseText;
+                console.log(this.responseText);
+            }
+        };
+
+
+        xmlhttp.open("GET", "http://34.209.252.152/star");
+        xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xmlhttp.send();
  	}
+    getDB();
 
  	
  	// DB.CREATE( 'my_first_table', { id: 0, foo: 'bar', test: 'ing' } );
@@ -56,12 +72,12 @@
  	// DB.CREATE( 'my_second_table', { id: 0, foo2: 'bar', test2: 'ing' } );
  	// DB.INSERT_INTO( 'my_second_table', [{test:'ed'},{foo:'bat'}] );
  	// console.log(DB.SELECT( 'my_second_table' ));
- 	console.log(DB.JOIN(DB.SELECT( 'my_first_table' ),DB.SELECT( 'my_second_table' ),"id","id",function (a, b) {
-    return {
-        id: a.id,
-        foo2: b.foo2,
-        test2: b.test2
-    };}));
+ 	// console.log(DB.JOIN(DB.SELECT( 'my_first_table' ),DB.SELECT( 'my_second_table' ),"id","id",function (a, b) {
+  //   return {
+  //       id: a.id,
+  //       foo2: b.foo2,
+  //       test2: b.test2
+  //   };}));
 
  	function updateDB()
  	{
@@ -126,22 +142,22 @@
 
         var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 
-        xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("demo").innerHTML =
-            this.responseText;
-       }
-    };
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("demo").innerHTML =
+                this.responseText;
+            }
+        };
 
 
-        xmlhttp.open("POST", "/localhost:27017");
+        xmlhttp.open("POST", "http://34.209.252.152/star");
         xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xmlhttp.send(JSON.stringify({ email: "hello@user.com", response: { name: "Tester" } }));
+        xmlhttp.send(JSON.stringify({ email: "hello@user.com", name: "luke" }));
 
 
  	}
 
-    postDB();
+    // postDB();
 
 </script>
 
