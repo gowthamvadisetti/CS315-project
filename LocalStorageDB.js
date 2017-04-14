@@ -498,7 +498,7 @@ License:       MIT License (see homepage)
 				}
 				else
 				{
-					throw new Error( table + ' is not a valid table name' );
+					console.log('there is not table:'+table);
 				}
 			}
 			else
