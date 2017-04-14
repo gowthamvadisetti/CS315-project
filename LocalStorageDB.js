@@ -192,7 +192,14 @@ License:       MIT License (see homepage)
 					d[k] = ( k == 'id' ) ? i : ( data[k] || p[k] );
 				}
 			}
+			console.log(DB[table]);
+
+			var temp=encode(DB[table].keysfun(d));
+			if (DB[table].keyval[temp]==true) {
+				throw new Error( 'primary key value already exists' );	
+			}
 			DB[table].data.push( d );
+			DB[table].keyval[temp]=true;
 			AFFECTED_ROWS++;
 			// garbage collection
 			d = data = NULL;
@@ -370,7 +377,7 @@ License:       MIT License (see homepage)
 		 *   @param obj dfn - the data object to use as a definition for all rows
 		 *   @param array data - the data you want to prefill the table with
 		 */
-		this.CREATE = function( table, dfn, data )
+		this.CREATE = function( table, dfn, keys,data)
 		{
 			if ( ! dfn ||
 				 tableExists( table ) )
@@ -384,7 +391,11 @@ License:       MIT License (see homepage)
 			DB[table].data	= [];
 			DB[table].dfn	= dfn;
 			DB[table].index	= 1;
+			DB[table].keysfun 	= keys;
+			DB[table].keyval={};
+			
 
+			console.log(DB[table].keys);
 			// cache the table index
 			DB[TABLES].push( table );
 			cache( TABLES );
@@ -512,7 +523,7 @@ License:       MIT License (see homepage)
 		 *   @param array data - an array of data objects to insert
 
 		 */
-		this.INSERT_INTO = function( table, data )
+		this.INSERT_INTO = function( table, data)
 		{
 			AFFECTED_ROWS = 0;
 			if ( tableExists( table ) )
