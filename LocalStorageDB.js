@@ -549,6 +549,9 @@ License:       MIT License (see homepage)
 			}
 		};
 
+
+		
+		//TODO PRIMARY KEY AND FOREIGN KEY
 		this.JOIN = function(primary, foreign, primaryKey, foreignKey, select)
 		{
 			var m = primary.length, n = foreign.length, index = [], c = [];

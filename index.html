@@ -39,12 +39,15 @@
  <script type="text/javascript">
 
  	//This is where we should GET the data from the server
+ 	var DB = new LocalStorageDB('my_first_database');
+
  	function getDB()
  	{
+ 		//GET JSON
 
  	}
 
- 	 var DB = new LocalStorageDB('my_first_database');
+ 	
  	// DB.CREATE( 'my_first_table', { id: 0, foo: 'bar', test: 'ing' } );
  	// DB.INSERT_INTO( 'my_first_table', [{test:'ed'},{foo:'bat'}] );
  	// console.log(DB.SELECT( 'my_first_table' ));
@@ -117,9 +120,17 @@
  	function postDB()
  	{
 
+        // var table=DB.SELECT( 'my_first_table' );
+
+        var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+        xmlhttp.open("POST", "/localhost:27017");
+        xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xmlhttp.send(JSON.stringify({ email: "hello@user.com", response: { name: "Tester" } }));
+
+
  	}
 
-
+    postDB();
 
 </script>
 
