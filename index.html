@@ -24,7 +24,8 @@
 				<input type="text" id ="first" name="firstname"><br>
 				Email:<br>
 				<input type="text" id ="email" name="email"><br><br>
-				<input type="submit" value="Submit" onclick="updateDB()">
+				<input type="submit" value="Submit" onclick="updateDB('newU','LocalDBtable')">
+				<input type="submit" value="Submit2" onclick="updateDB('newU2','LocalDBtable2')">
 			</div>
 			<div class="col-sm-6">
 				<h1>Update</h1>
@@ -34,7 +35,8 @@
 				Email:<br>
 				<input type="text" id ="email" name="email">
 				<br><br>
-				<input type="submit" value="Submit" onclick="updateDB()">
+				<input type="submit" value="Submit" onclick="updateDB('newU','LocalDBtable')">
+				<input type="submit" value="Submit2" onclick="updateDB('newU2','LocalDBtable2')">
 			</div>
 		</div>
 	</div>
@@ -45,29 +47,40 @@
 			<p>ServerDB at the START</p>
 		</div>
 		<div class="col-sm-6">
-			<input type="button" value="LocalDB" onclick="viewDB()">
+			<input type="button" value="LocalDB1" onclick="viewDB('newU', 'LocalDBtable')">
+			<input type="button" value="LocalDB2" onclick="viewDB('newU2', 'LocalDBtable2')">
 		</div>
 	</div>
 	<div class="row">
 		<!-- <p>After Reload</p> -->
 		<div class="col-sm-6">
+		<p>server table for newU</p>
 		<table class="table table-striped" id="demo1"></table>
+		<p>server table for newU2</p>
+		<table class="table table-striped" id="demo2"></table>
 		</div>
 
 		<div class="col-sm-6">
+		<p>local table for newU</p>
 		<table class="table table-striped" id="LocalDBtable"></table>
+		<p>local table for newU2</p>
+		<table class="table table-striped" id="LocalDBtable2"></table>
 		</div>
 	</div>
 	<br><br>
 	<div class="row">
 		<div class="col-sm-6">
-			<button onclick="postDB()">Post</button><br>
+			<button onclick="postDB('star', 'newU', 'post')">Post1</button><br>
+			<button onclick="postDB('star2', 'newU2', 'post2')">Post2</button><br>
 		</div>
 		<div class="col-sm-6">
+			<p>post response from server names(table1)</p>
 			<p id="post"></p>
+			<p>post response from server names2(table2)</p>
+			<p id="post2"></p>
 		</div>
 	</div>
-		<table class="table table-striped" id="demo2"></table>
+		<table class="table table-striped" id="post_demo"></table>
 	</div>
 	</div>
 
@@ -90,9 +103,9 @@
 	// DB.DROP( 'my_second_table');
 	//DB.DROP('newU');
 
-	function getDB(siteName)
+	function getDB(siteName, localTableName, demoNum)
 	{
-		DB.DROP('newU');
+		DB.DROP(localTableName);
 		//GET JSON
 		// var table=DB.SELECT( 'my_first_table' );
 
@@ -104,21 +117,22 @@
 				//this.responseText;
 				// console.log(this.responseText);
 			var json_input=JSON.parse(this.responseText);
-			CreateTableFromJSON(json_input,'demo1')
+			CreateTableFromJSON(json_input,demoNum)
 			//console.log(json_input);
-			DB.CREATE( 'newU', {id: 0, name: "DARTH VADER", email: "force@dark.com"},function (a) {
+			DB.CREATE( localTableName, {id: 0, name: "DARTH VADER", email: "force@dark.com"},function (a) {
 			return {
 			email: a.email,
 			};});
 
-			DB.INSERT_INTO('newU',json_input);
-			console.log(DB.SELECT('newU'));
+			DB.INSERT_INTO(localTableName,json_input);
+			console.log(DB.SELECT(localTableName));
 			}
 		};
 
 		//viewDB();
 
 		xmlhttp.open("GET", "http://34.209.252.152/" + siteName);
+		console.log("http://34.209.252.152/" + siteName);
 		xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 		xmlhttp.send();
 
@@ -127,23 +141,23 @@
 
 	var unsaved = false;
 
-	getDB("star");
-	getDB("star2")
+	getDB("star", "newU", "demo1");
+	getDB("star2", "newU2", "demo2");
 
-	function updateDB()
+	function updateDB(localTableName, localTableNum)
 	{
 		var first_name=document.getElementById('first').value;
 		var email=document.getElementById('email').value;
-		DB.INSERT_INTO( 'newU', [{name:first_name,email:email}] );
-		viewDB();
+		DB.INSERT_INTO( localTableName, [{name:first_name,email:email}] );
+		viewDB(localTableName, localTableNum);
 		unsaved = true;
 	}
 
-	function viewDB() {
-		var table=DB.SELECT( 'newU' );
-		CreateTableFromJSON(table, 'LocalDBtable');
+	function viewDB(localTableName, localTableNum) {
+		var table=DB.SELECT( localTableName );
+		CreateTableFromJSON(table, localTableNum);
 	}
-
+	//'LocalDBtable'
 	//viewDB();
 
 	function CreateTableFromJSON(table, gid) {
@@ -160,6 +174,7 @@
 		}
 		// CREATE DYNAMIC TABLE.
 		var table = document.getElementById(gid);
+		console.log("gid=" + gid);
 		table.innerHTML = "";
 		//var table = document.createElement("table")
 		// CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
@@ -184,7 +199,7 @@
 		}
 	}
 
-	function postDB(siteName)
+	function postDB(siteName,localTableName,postID)
 	{
 
 		// var table=DB.SELECT( 'my_first_table' );
@@ -194,12 +209,12 @@
 		xmlhttp.onreadystatechange = function() {
 	
 			if (this.readyState == 4 && this.status == 200) {
-				document.getElementById("post").innerHTML = "After Post";
+				document.getElementById(postID).innerHTML = "After Post";
 				//this.responseText;
 				var Jinput = JSON.parse(this.responseText);
 				var datastrip = Jinput.result;
 				//console.log("enter is fyn")
-				CreateTableFromJSON(datastrip,'demo2');
+				CreateTableFromJSON(datastrip,'post_demo');
 				//console.log("Exit is also is fyn")
 
 			}
@@ -209,7 +224,7 @@
 		xmlhttp.open("POST", "http://34.209.252.152/" + siteName);
 		xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 		//console.log(DB.SELECT('newU'));
-		xmlhttp.send(JSON.stringify(DB.SELECT('newU')));
+		xmlhttp.send(JSON.stringify(DB.SELECT(localTableName)));
 		//DB.DROP('newU');
 	}
 	// window.alert = function(msg){
@@ -229,14 +244,15 @@
 	//     //return false;
 	// }
 
-	function unloadPage(){ 
-		postDB("star");
+	function unloadPage(siteName, localTableName, postID){ 
+		postDB(siteName, localTableName, postID);
 	    if(unsaved){
 	        return "You have unsaved changes on this page. Do you want to leave this page and discard your changes or stay on this page?";
 	    }
 	}
 
-	window.onbeforeunload = unloadPage;
+	window.onbeforeunload = unloadPage('star', 'newU', 'post');
+	window.onbeforeunload = unloadPage('star2', 'newU2', 'post2');
 
 	//This is where we should POST the data to the server
 </script>

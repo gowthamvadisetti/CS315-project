@@ -55,6 +55,10 @@ def add_star2():
     output.append({'name' : new_star['name'], 'email' : new_star['email'], 'id':new_star['id']})
   return jsonify({'result' : output})
 
+###
+# ignore below part
+###
+
 @app.route('/star_drop', methods=['GET'])
 def drop_stars():
   star = mongo.db.names
