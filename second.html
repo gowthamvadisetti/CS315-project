@@ -33,7 +33,7 @@
     <!--  -->
     <div class="jumbotron text-center">
         <h1>Welcome to JSql drive</h1>
-        <p>Fast relaiable Data-transmission using JS & NoSql database with localstorage  </p> 
+        <p>Fast reliable Data-transmission using JS & NoSql database with localstorage  </p> 
     </div>
     <!--  -->    <!--  -->      <!--  -->   <!--  -->
     <!--  -->    <!--  -->      <!--  -->   <!--  -->
@@ -44,30 +44,50 @@
                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Join Using<span class="caret"></span></button>
                   <ul class="dropdown-menu list-group">
                     <li class="list-group-item">
-                        <p onclick="joinDB('newU','newU2','id')"> id </p>
+                        <p class="ptag_hover" onclick="joinDB('newU','newU2','id')"> id </p>
                     </li>
                     <li class="list-group-item">
-                        <p onclick="joinDB('newU','newU2','name')">    First name</p>
+                        <p class="ptag_hover" onclick="joinDB('newU','newU2','name')">    First name</p>
                     </li>
                     <li class="list-group-item">
-                        <p onclick="joinDB('newU','newU2','email')">email</p>
+                        <p class="ptag_hover" onclick="joinDB('newU','newU2','email')">email</p>
                     </li>
                 </ul>
             </div>
         </div>
         <div class="col-sm-3">
-            <button onclick="crossDB('newU', 'newU2')">Cross</button><br>
+            <button class="btn btn-primary" onclick="crossDB('newU', 'newU2')">Cross</button><br>
         </div>
         <div class="col-sm-3">
-            <button onclick="unionDB('newU', 'newU2')">Union</button><br>
+            <button class="btn btn-primary" onclick="unionDB('newU', 'newU2')">Union</button><br>
         </div>
         <div class="col-sm-3">
-            <button onclick="intersectDB('newU', 'newU2')">Intersect</button><br>
+            <button class="btn btn-primary" onclick="intersectDB('newU', 'newU2')">Intersect</button><br>
         </div>
         </div>
     </div>
     <!--  -->    <!--  -->      <!--  -->   <!--  -->
     <br><br>
+
+
+     <div class="container">
+    <!--  -->    <!--  -->      <!--  -->   <!--  -->
+    <div class="row">
+        <div class="col-sm-6">
+            <p id="output"></p>
+        </div>
+    </div>
+    <!--  -->    <!--  -->      <!--  -->   <!--  -->
+    <div class="row">
+        <!-- <p>After Reload</p> -->
+        <table class="table table-striped" id="result"></table>
+
+    </div>
+    </div>
+    <!--  -->    <!--  -->      <!--  -->   <!--  -->
+    <!--  -->    <!--  -->      <!--  -->   <!--  -->
+    <br><br>
+
     <!--  -->    <!--  -->      <!--  -->   <!--  -->
     <div class="container">
     <!--  -->    <!--  -->      <!--  -->   <!--  -->

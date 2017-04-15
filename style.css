@@ -11,3 +11,6 @@ table, th, td
 th {
     font-weight:bold;
 }
+.ptag_hover{
+	cursor: pointer; cursor: hand;
+}

@@ -67,7 +67,8 @@
         unsaved = true;
     }
     function joinDB(table1,table2,key) {
-    	var joined_table=DB.JOIN(DB.SELECT( 'newU' ),DB.SELECT( 'newU2' ),key,key,function (a, b) {
+    	document.getElementById("output").innerHTML="Result";
+    	var new_table=DB.JOIN(DB.SELECT( 'newU' ),DB.SELECT( 'newU2' ),key,key,function (a, b) {
 	    return {
 	        id1: a.id,
 	        email:a.email,
@@ -77,13 +78,14 @@
 	        name2:b.name,
 	        
 	    };});
-	    console.log(joined_table);
+	    CreateTableFromJSON(new_table, "result")
 	    // viewDB(localTableName, localTableNum);
         // unsaved = true;
     }
 
     function crossDB(table1,table2) {
-    	var joined_table=DB.CROSS(DB.SELECT( 'newU' ),DB.SELECT( 'newU2' ),function (a, b) {
+    	document.getElementById("output").innerHTML="Result";
+    	var new_table=DB.CROSS(DB.SELECT( 'newU' ),DB.SELECT( 'newU2' ),function (a, b) {
 	    return {
 	        id1: a.id,
 	        email:a.email,
@@ -93,16 +95,18 @@
 	        name2:b.name,
 	        
 	    };});
-	    console.log(joined_table);
+	    CreateTableFromJSON(new_table, "result")
     }
 
     function intersectDB(table1,table2) {
-    	var joined_table=DB.INTERSECT(DB.SELECT( 'newU' ),DB.SELECT( 'newU2' ));
-	    console.log(joined_table);
+    	document.getElementById("output").innerHTML="Result";
+    	var new_table=DB.INTERSECT(DB.SELECT( 'newU' ),DB.SELECT( 'newU2' ));
+	    CreateTableFromJSON(new_table, "result")
     }
     function unionDB(table1,table2) {
-    	var joined_table=DB.UNION(DB.SELECT( 'newU' ),DB.SELECT( 'newU2' ));
-	    console.log(joined_table);
+    	document.getElementById("output").innerHTML="Result";
+    	var new_table=DB.UNION(DB.SELECT( 'newU' ),DB.SELECT( 'newU2' ));
+	    CreateTableFromJSON(new_table, "result")
     }
 
 

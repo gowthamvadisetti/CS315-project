@@ -604,12 +604,12 @@ License:       MIT License (see homepage)
 
     		for (var i = 0; i < m; i++) {     // loop through m items
         		var row1 = table1[i];
-        		index[JSON.stringify(row1)] = row1; // create an index for primary table
+        		index[JSON.stringify(row1)] = JSON.stringify(row1); // create an index for primary table
     		}		
 
     		for (var j = 0; j < n; j++) {     // loop through n items
         		var row2 = table2[j];
-        		if (row2 === index[JSON.stringify(row2)]) // get corresponding row from primary
+        		if (JSON.stringify(row2) === index[JSON.stringify(row2)]) // get corresponding row from primary
         		{
         			c.push(row2);
         		}         // select only the columns you need
@@ -624,13 +624,13 @@ License:       MIT License (see homepage)
 
     		for (var i = 0; i < m; i++) {     // loop through m items
         		var row1 = table1[i];
-        		index[JSON.stringify(row1)] = row1; // create an index for primary table
+        		index[JSON.stringify(row1)] = JSON.stringify(row1); // create an index for primary table
         		c.push(row1)
     		}		
 
     		for (var j = 0; j < n; j++) {     // loop through n items
         		var row2 = table2[j];
-        		if (!(row2 === index[JSON.stringify(row2)])) // get corresponding row from primary
+        		if (!(JSON.stringify(row2) === index[JSON.stringify(row2)])) // get corresponding row from primary
         		{
         			c.push(row2);
         		}         // select only the columns you need
