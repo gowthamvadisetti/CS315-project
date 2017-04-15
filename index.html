@@ -90,7 +90,7 @@
 	// DB.DROP( 'my_second_table');
 	//DB.DROP('newU');
 
-	function getDB()
+	function getDB(siteName)
 	{
 		DB.DROP('newU');
 		//GET JSON
@@ -118,7 +118,7 @@
 
 		//viewDB();
 
-		xmlhttp.open("GET", "http://34.209.252.152/star");
+		xmlhttp.open("GET", "http://34.209.252.152/" + siteName);
 		xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 		xmlhttp.send();
 
@@ -127,7 +127,8 @@
 
 	var unsaved = false;
 
-	getDB();
+	getDB("star");
+	getDB("star2")
 
 	function updateDB()
 	{
@@ -183,7 +184,7 @@
 		}
 	}
 
-	function postDB()
+	function postDB(siteName)
 	{
 
 		// var table=DB.SELECT( 'my_first_table' );
@@ -205,7 +206,7 @@
 		};
 
 
-		xmlhttp.open("POST", "http://34.209.252.152/star");
+		xmlhttp.open("POST", "http://34.209.252.152/" + siteName);
 		xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 		//console.log(DB.SELECT('newU'));
 		xmlhttp.send(JSON.stringify(DB.SELECT('newU')));
@@ -229,7 +230,7 @@
 	// }
 
 	function unloadPage(){ 
-		postDB();
+		postDB("star");
 	    if(unsaved){
 	        return "You have unsaved changes on this page. Do you want to leave this page and discard your changes or stay on this page?";
 	    }
