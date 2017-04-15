@@ -38,21 +38,30 @@
     <!--  -->    <!--  -->      <!--  -->   <!--  -->
     <!--  -->    <!--  -->      <!--  -->   <!--  -->
     <div class="container">
+        <div class="row">
+        <div class="col-sm-4">
             <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Join Using<span class="caret"></span></button>
-                  <ul class="dropdown-menu">
-                    <li>
+                  <ul class="dropdown-menu list-group">
+                    <li class="list-group-item">
                         <p onclick="joinDB('newU','newU2','id')"> id </p>
                     </li>
-                    <li>
+                    <li class="list-group-item">
                         <p onclick="joinDB('newU','newU2','name')">    First name</p>
                     </li>
-                    <li>
+                    <li class="list-group-item">
                         <p onclick="joinDB('newU','newU2','email')">email</p>
                     </li>
                 </ul>
             </div>
-                <!-- <input type="submit" value="Submit1" onclick="joinDB('newU','newU2','')"> -->
+        </div>
+        <div class="col-sm-4">
+            <button onclick="crossDB('newU', 'newU2')">Cross</button><br>
+        </div>
+        <div class="col-sm-4">
+            <button onclick="unionDB('newU', 'newU2')">Union</button><br>
+        </div>
+        </div>
     </div>
     <!--  -->    <!--  -->      <!--  -->   <!--  -->
     <br><br>
