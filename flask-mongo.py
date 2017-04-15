@@ -6,10 +6,20 @@ import json
 
 app = Flask(__name__)
 
-app.config['MONGO_DBNAME'] = 'newU'
+app.config['MONGO_DBNAME'] = 'users'
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/users'
 
 mongo = PyMongo(app)
+
+@app.route('/star_drop', methods=['GET'])
+def drop_stars():
+  star = mongo.db.names
+  is_dropped = mongo.db.names.drop()
+  if is_dropped:
+    return 'dropped successfully'
+  else:
+    return 'error while dropping users.name table' 
+
 
 @app.route('/star', methods=['GET'])
 def get_all_stars():
