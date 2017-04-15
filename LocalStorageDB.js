@@ -569,13 +569,16 @@ License:       MIT License (see homepage)
 
     		for (var i = 0; i < m; i++) {     // loop through m items
         		var row = primary[i];
-        		index[row[primaryKey]] = row; // create an index for primary table
+        		index[encode(row[primaryKey])] = row; // create an index for primary table
     		}		
 
     		for (var j = 0; j < n; j++) {     // loop through n items
         		var y = foreign[j];
-        		var x = index[y[foreignKey]]; // get corresponding row from primary
+        		var x = index[encode(y[foreignKey])]; // get corresponding row from primary
+        		if (x != null) {
         		c.push(select(x, y));         // select only the columns you need
+        			
+        		}
     		}
 
     		return c;
