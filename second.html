@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<!--  -->
+<!--  -->
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
+</head>
+<!--  -->
+<!--  -->
+<body>
+    <div class="jumbotron text-center">
+        <h1>Welcome to JSql drive</h1>
+        <p>Fast relaiable Data-transmission using JS & NoSql database with localstorage  </p> 
+    </div>
+    <!--  -->    <!--  -->      <!--  -->   <!--  -->
+    <!--  -->    <!--  -->      <!--  -->   <!--  -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>NewEntry</h1>
+                First name:<br>
+                <input type="text" id ="first" name="firstname"><br>
+                Email:<br>
+                <input type="text" id ="email" name="email"><br><br>
+                <input type="submit" value="Submit1" onclick="insertDB('newU','LocalDBtable')">
+                <input type="submit" value="Submit2" onclick="insertDB('newU2','LocalDBtable2')">
+            </div>
+            <div class="col-sm-6">
+                <h1>Update</h1>
+                First name:<br>
+                <input type="text" id ="first" name="firstname">
+                <br>
+                Email:<br>
+                <input type="text" id ="email" name="email">
+                <br><br>
+                <input type="submit" value="Submit1" onclick="updateDB('newU','LocalDBtable')">
+                <input type="submit" value="Submit2" onclick="updateDB('newU2','LocalDBtable2')">
+            </div>
+        </div>
+    </div>
+    <!--  -->    <!--  -->      <!--  -->   <!--  -->
+    <br><br>
+    <!--  -->    <!--  -->      <!--  -->   <!--  -->
+    <div class="container">
+    <!--  -->    <!--  -->      <!--  -->   <!--  -->
+    <div class="row">
+        <div class="col-sm-6">
+            <p>ServerDB at the START - table1</p>
+        </div>
+        <div class="col-sm-6">
+            <input type="button" value="LocalDB1" onclick="viewDB('newU', 'LocalDBtable')">
+        </div>
+    </div>
+    <!--  -->    <!--  -->      <!--  -->   <!--  -->
+    <div class="row">
+        <!-- <p>After Reload</p> -->
+        <div class="col-sm-6">
+        <table class="table table-striped" id="demo1"></table>
+        </div>
+
+        <div class="col-sm-6">
+        <table class="table table-striped" id="LocalDBtable"></table>
+        </div>
+    </div>
+    <!--  -->    <!--  -->      <!--  -->   <!--  -->
+    <br><br>
+    <div class="row">
+        <div class="col-sm-6">
+            <p>ServerDB at the START - table2</p>
+        </div>
+        <div class="col-sm-6">
+            <input type="button" value="LocalDB2" onclick="viewDB('newU2', 'LocalDBtable2')">
+        </div>
+    </div>
+    <!--  -->    <!--  -->      <!--  -->   <!--  -->
+    <div class="row">
+        <!-- <p>After Reload</p> -->
+        <div class="col-sm-6">
+        <table class="table table-striped" id="demo3"></table>
+        </div>
+
+        <div class="col-sm-6">
+        <table class="table table-striped" id="LocalDBtable2"></table>
+        </div>
+    </div>
+    <!--  -->    <!--  -->      <!--  -->   <!--  -->
+    <br><br>
+    <div class="row">
+        <div class="col-sm-6">
+            <button onclick="postDB('star', 'newU', 'post1')">Post1</button><br>
+        </div>
+        <div class="col-sm-6">
+            <!-- <p id="post1"></p> -->
+            <button onclick="postDB('star2', 'newU2', 'post2')">Post2</button><br>
+        </div>
+    </div>
+    <!--  -->    <!--  -->      <!--  -->   <!--  -->    
+    <div class="row">
+        <div class="col-sm-6">
+            <table class="table table-striped" id="post1"></table>
+        </div>
+        <div class="col-sm-6">
+            <table class="table table-striped" id="post2"></table>
+        </div>
+    </div>
+    </div>
+    <!--  -->    <!--  -->      <!--  -->   <!--  -->    
+    <div>
+        
+    </div>
+
+    <div id="demo"></div>
+    <div id="demop"></div>
+    <p id="msg"></p>
+
+<script type="text/javascript" src="LocalStorageDB.js"></script>
+<script type="text/javascript" src="backend.js"></script>
+
+</body>
+</html>
