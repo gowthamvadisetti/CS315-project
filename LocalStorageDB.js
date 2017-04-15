@@ -595,7 +595,7 @@ License:       MIT License (see homepage)
     		return c;
 		};
 
-		this.INTERSECTION = function(table1, table2, select)
+		this.INTERSECT = function(table1, table2)
 		{
 			var m = table1.length, n = table2.length, index = [], c = [];
 
@@ -615,14 +615,14 @@ License:       MIT License (see homepage)
     		return c;
 		};
 
-		this.UNION = function(table1, table2, Key1, Key2, select)
+		this.UNION = function(table1, table2)
 		{
 			var m = table1.length, n = table2.length, index = [], c = [];
 
     		for (var i = 0; i < m; i++) {     // loop through m items
         		var row1 = table1[i];
         		index[JSON.stringify(row1)] = row1; // create an index for primary table
-        		c.push(row)
+        		c.push(row1)
     		}		
 
     		for (var j = 0; j < n; j++) {     // loop through n items
