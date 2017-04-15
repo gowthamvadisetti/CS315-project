@@ -49,11 +49,20 @@
     getDB("star", "newU", "demo1");
     getDB("star2", "newU2", "demo3");
 
-    function updateDB(localTableName, localTableNum)
+    function insertDB(localTableName, localTableNum)
     {
         var first_name=document.getElementById('first').value;
         var email=document.getElementById('email').value;
         DB.INSERT_INTO( localTableName, [{name:first_name,email:email}] );
+        viewDB(localTableName, localTableNum);
+        unsaved = true;
+    }
+
+    function updateDB(localTableName, localTableNum)
+    {
+        var first_name=document.getElementById('first').value;
+        var email=document.getElementById('email').value;
+        DB.UPDATE( localTableName, {name:first_name},{email:email} );
         viewDB(localTableName, localTableNum);
         unsaved = true;
     }
