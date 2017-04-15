@@ -14,11 +14,11 @@ mongo = PyMongo(app)
 @app.route('/star_drop', methods=['GET'])
 def drop_stars():
   star = mongo.db.names
-  is_dropped = mongo.db.names.drop()
-  if is_dropped:
+  try:
+    mongo.db.names.drop()
     return 'dropped successfully'
-  else:
-    return 'error while dropping users.name table' 
+  except:
+    return 'error while dropping users.names table' 
 
 
 @app.route('/star', methods=['GET'])
