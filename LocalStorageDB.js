@@ -581,7 +581,7 @@ License:       MIT License (see homepage)
     		return c;
 		};
 
-		this.CROSS = function(table1, table2, Key1, Key2, select)
+		this.CROSS = function(table1, table2, select)
 		{
 			var m = table1.length, n = table2.length, index = [], c = [];
 
@@ -595,19 +595,23 @@ License:       MIT License (see homepage)
     		return c;
 		};
 
-		this.INTERSECTION = function(table1, table2, Key1, Key2, select)
+		this.INTERSECTION = function(table1, table2, select)
 		{
 			var m = table1.length, n = table2.length, index = [], c = [];
 
     		for (var i = 0; i < m; i++) {     // loop through m items
         		var row1 = table1[i];
-    			for (var j = 0; j < n; j++) {     // loop through n items
-        			var row2 = table2[j];
-        			if (JSON.stringify(row1) === JSON.stringify(row2)) {
-        				c.push(row1);
-        			}
-    			}
+        		index[JSON.stringify(row1)] = row1; // create an index for primary table
+    		}		
+
+    		for (var j = 0; j < n; j++) {     // loop through n items
+        		var row2 = table2[j];
+        		if (row2 === index[JSON.stringify(row2)]) // get corresponding row from primary
+        		{
+        			c.push(row2);
+        		}         // select only the columns you need
     		}
+
     		return c;
 		};
 
@@ -617,14 +621,18 @@ License:       MIT License (see homepage)
 
     		for (var i = 0; i < m; i++) {     // loop through m items
         		var row1 = table1[i];
-    			for (var j = 0; j < n; j++) {     // loop through n items
-        			var row2 = table2[j];
-        			c.push(row1);
-        			if (!(JSON.stringify(row1) === JSON.stringify(row2))) {
-        				c.push(row2);
-        			}
-    			}
+        		index[JSON.stringify(row1)] = row1; // create an index for primary table
+        		c.push(row)
+    		}		
+
+    		for (var j = 0; j < n; j++) {     // loop through n items
+        		var row2 = table2[j];
+        		if (!(row2 === index[JSON.stringify(row2)])) // get corresponding row from primary
+        		{
+        			c.push(row2);
+        		}         // select only the columns you need
     		}
+
     		return c;
 		};
 
