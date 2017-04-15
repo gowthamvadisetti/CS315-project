@@ -595,6 +595,21 @@ License:       MIT License (see homepage)
     		return c;
 		};
 
+		this.INTERSECTION = function(table1, table2, Key1, Key2, select)
+		{
+			var m = table1.length, n = table2.length, index = [], c = [];
+
+    		for (var i = 0; i < m; i++) {     // loop through m items
+        		var row1 = table1[i];
+    			for (var j = 0; j < n; j++) {     // loop through n items
+        			var row2 = table2[j];
+        			JSON.stringify(row1) === JSON.stringify(row2)
+        			c.push(row1);
+    			}
+    		}
+    		return c;
+		};
+
 	 	/**
 		 * LocalStorageDB.SELECT( table, criteria ) -> array
 		 * Selects rows from a given table based on the supplied criteria
