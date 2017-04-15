@@ -1,6 +1,6 @@
 Update --> primary key check (similar to Insert)
 
-UI---> partially completed. Anymore required?
+Completed --> UI---> partially completed. Anymore required?
 ----
 
 Add operations similar to Join like Crossproduct,Intersection,Union etc.,
@@ -11,7 +11,7 @@ Show working of POST and GET requests working in UI.
 
 check for borderline cases and errors.
 
-window.onbeforeunload make it working properly without errors
+Completed ---> window.onbeforeunload make it working properly without errors
 
 Order the code properly
 

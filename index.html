@@ -125,6 +125,8 @@
 		//viewDB();
 	}
 
+	var unsaved = false;
+
 	getDB();
 
 	function updateDB()
@@ -133,6 +135,7 @@
 		var email=document.getElementById('email').value;
 		DB.INSERT_INTO( 'newU', [{name:first_name,email:email}] );
 		viewDB();
+		unsaved = true;
 	}
 
 	function viewDB() {
@@ -224,6 +227,15 @@
 	//     }
 	//     //return false;
 	// }
+
+	function unloadPage(){ 
+		postDB();
+	    if(unsaved){
+	        return "You have unsaved changes on this page. Do you want to leave this page and discard your changes or stay on this page?";
+	    }
+	}
+
+	window.onbeforeunload = unloadPage;
 
 	//This is where we should POST the data to the server
 </script>
