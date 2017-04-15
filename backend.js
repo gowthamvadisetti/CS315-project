@@ -60,8 +60,8 @@
 
     function updateDB(localTableName, localTableNum)
     {
-        var first_name=document.getElementById('first').value;
-        var email=document.getElementById('email').value;
+        var first_name=document.getElementById('first-update').value;
+        var email=document.getElementById('email-update').value;
         DB.UPDATE( localTableName, {name:first_name},{email:email} );
         viewDB(localTableName, localTableNum);
         unsaved = true;
