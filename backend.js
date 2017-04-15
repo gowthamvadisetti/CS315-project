@@ -66,6 +66,22 @@
         viewDB(localTableName, localTableNum);
         unsaved = true;
     }
+    function joinDB(table1,table2,key) {
+    	console.log("this is not ");
+    	var joined_table=DB.JOIN(DB.SELECT( 'newU' ),DB.SELECT( 'newU2' ),key,key,function (a, b) {
+	    return {
+	        id1: a.id,
+	        email:a.email,
+	        name:a.name,
+	        id2: b.id,
+	        email2:b.email,
+	        name2:b.name,
+	        
+	    };});
+	    console.log(joined_table);
+	    // viewDB(localTableName, localTableNum);
+        // unsaved = true;
+    }
 
     function viewDB(localTableName, localTableNum) {
         var table=DB.SELECT( localTableName );
