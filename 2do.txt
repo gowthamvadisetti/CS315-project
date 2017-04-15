@@ -1,6 +1,6 @@
 Update --> primary key check (similar to Insert)
 
-UI
+UI---> partially completed. Anymore required?
 ----
 
 Add operations similar to Join like Crossproduct,Intersection,Union etc.,
