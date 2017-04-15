@@ -67,7 +67,6 @@
         unsaved = true;
     }
     function joinDB(table1,table2,key) {
-    	console.log("this is not ");
     	var joined_table=DB.JOIN(DB.SELECT( 'newU' ),DB.SELECT( 'newU2' ),key,key,function (a, b) {
 	    return {
 	        id1: a.id,
@@ -82,6 +81,32 @@
 	    // viewDB(localTableName, localTableNum);
         // unsaved = true;
     }
+
+    function crossDB(table1,table2) {
+    	var joined_table=DB.CROSS(DB.SELECT( 'newU' ),DB.SELECT( 'newU2' ),function (a, b) {
+	    return {
+	        id1: a.id,
+	        email:a.email,
+	        name:a.name,
+	        id2: b.id,
+	        email2:b.email,
+	        name2:b.name,
+	        
+	    };});
+	    console.log(joined_table);
+    }
+
+    function intersectDB(table1,table2) {
+    	var joined_table=DB.INTERSECT(DB.SELECT( 'newU' ),DB.SELECT( 'newU2' ));
+	    console.log(joined_table);
+    }
+    function unionDB(table1,table2) {
+    	var joined_table=DB.UNION(DB.SELECT( 'newU' ),DB.SELECT( 'newU2' ));
+	    console.log(joined_table);
+    }
+
+
+
 
     function viewDB(localTableName, localTableNum) {
         var table=DB.SELECT( localTableName );
