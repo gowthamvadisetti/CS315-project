@@ -48,18 +48,21 @@
 	<!-- <div class="row"> -->
 		<table class="table table-striped" id="ServerDBtable"></table>
 		<!-- </div> -->
-		<p>Below asdfasdbnm </p>
+		<p>After Reload</p>
 		<table class="table table-striped" id="demo1"></table>
+		<p>After Post</p>
+		<table class="table table-striped" id="demo2"></table>
 	</div>
 
 
 	<div id="demo"></div>
 	<button onclick="postDB()">Post</button>
+	<div id="demop"></div>
+
 	<!-- <p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
 	 -->
  	<div class="container">
-		<p>Below POST KA HE</p>
-		<table class="table table-striped" id="demo2"></table>
+		
 	</div>
 
 <p id="msg"></p>
@@ -92,7 +95,7 @@
 				//this.responseText;
 				// console.log(this.responseText);
 			var json_input=JSON.parse(this.responseText);
-			//CreateTableFromJSON(json_input,'demo1')
+			CreateTableFromJSON(json_input,'demo1')
 			//console.log(json_input);
 			DB.CREATE( 'newU', {id: 0, name: "DARTH VADER", email: "force@dark.com"},function (a) {
 			return {
@@ -210,10 +213,14 @@
 		xmlhttp.onreadystatechange = function() {
 	
 			if (this.readyState == 4 && this.status == 200) {
-				//document.getElementById("demo").innerHTML =
+				//document.getElementById("demop").innerHTML =
 				//this.responseText;
-				var input = JSON.parse(this.responseText);
-				CreateTableFromJSON(input,'demo1');
+				var Jinput = JSON.parse(this.responseText);
+				var datastrip = Jinput.result;
+				//console.log("enter is fyn")
+				CreateTableFromJSON(datastrip,'demo2');
+				//console.log("Exit is also is fyn")
+
 			}
 		};
 
