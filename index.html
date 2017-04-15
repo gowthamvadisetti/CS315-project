@@ -41,31 +41,40 @@
 	<br><br>
 	<div class="container">
 	<div class="row">
-		<div class="col-sm-4">
-		<input type="button" value="View ServerDB" onclick="viewDB()">
+		<div class="col-sm-6">
+			<p>ServerDB at the START</p>
+		</div>
+		<div class="col-sm-6">
+			<input type="button" value="LocalDB" onclick="viewDB()">
 		</div>
 	</div>
-	<!-- <div class="row"> -->
-		<table class="table table-striped" id="ServerDBtable"></table>
-		<!-- </div> -->
-		<p>After Reload</p>
+	<div class="row">
+		<!-- <p>After Reload</p> -->
+		<div class="col-sm-6">
 		<table class="table table-striped" id="demo1"></table>
-		<p>After Post</p>
+		</div>
+
+		<div class="col-sm-6">
+		<table class="table table-striped" id="LocalDBtable"></table>
+		</div>
+	</div>
+	<br><br>
+	<div class="row">
+		<div class="col-sm-6">
+			<button onclick="postDB()">Post</button><br>
+		</div>
+		<div class="col-sm-6">
+			<p id="post"></p>
+		</div>
+	</div>
 		<table class="table table-striped" id="demo2"></table>
+	</div>
 	</div>
 
 
 	<div id="demo"></div>
-	<button onclick="postDB()">Post</button>
 	<div id="demop"></div>
-
-	<!-- <p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
-	 -->
- 	<div class="container">
-		
-	</div>
-
-<p id="msg"></p>
+	<p id="msg"></p>
 
  <script type="text/javascript" src="LocalStorageDB.js"></script>
  <script type="text/javascript">
@@ -107,42 +116,34 @@
 			}
 		};
 
+		//viewDB();
 
 		xmlhttp.open("GET", "http://34.209.252.152/star");
 		xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 		xmlhttp.send();
+
+		//viewDB();
 	}
 
-	// DB.INSERT_INTO( 'temp4', [{foo2:'bar1'},{test2:'bat'}] );
-  //   DB.INSERT_INTO( 'temp4', [{foo2:'bar1'},{test2:'bat'}] );
 	getDB();
-
-	// DB.CREATE( 'my_first_table', { id: 0, foo: 'bar', test: 'ing' } );
-	// DB.INSERT_INTO( 'my_first_table', [{test:'ed'},{foo:'bat'}] );
-	// console.log(DB.SELECT( 'my_first_table' ));
-	 // DB.CREATE( 'my_second_table', { id: 0, foo2: 'bar', test2: 'ing' } );
-	// DB.INSERT_INTO( 'my_second_table', [{test:'ed'},{foo:'bat'}] );
-	// console.log(DB.SELECT( 'my_second_table' ));
-	// console.log(DB.JOIN(DB.SELECT( 'my_first_table' ),DB.SELECT( 'my_second_table' ),"id","id",function (a, b) {
-  //   return {
-  //       id: a.id,
-  //       foo2: b.foo2,
-  //       test2: b.test2
-  //   };}));
 
 	function updateDB()
 	{
 		var first_name=document.getElementById('first').value;
 		var email=document.getElementById('email').value;
 		DB.INSERT_INTO( 'newU', [{name:first_name,email:email}] );
+		viewDB();
 	}
+
 	function viewDB() {
 		var table=DB.SELECT( 'newU' );
-		CreateTableFromJSON(table, 'ServerDBtable');
+		CreateTableFromJSON(table, 'LocalDBtable');
 	}
+
+	//viewDB();
+
 	function CreateTableFromJSON(table, gid) {
 		var myBooks = table;
-
 		// EXTRACT VALUE FOR HTML HEADER. 
 		// ('Book ID', 'Book Name', 'Category' and 'Price')
 		var col = [];
@@ -153,7 +154,6 @@
 				}
 			}
 		}
-
 		// CREATE DYNAMIC TABLE.
 		var table = document.getElementById(gid);
 		table.innerHTML = "";
@@ -178,13 +178,36 @@
 				tabCell.innerHTML = myBooks[i][col[j]];
 			}
 		}
-
-		// FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
-		//var divContainer = document.getElementById("ServerDBtable");
-		//divContainer.innerHTML = "";
-		//divContainer.appendChild(table);
 	}
 
+	function postDB()
+	{
+
+		// var table=DB.SELECT( 'my_first_table' );
+
+		var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+
+		xmlhttp.onreadystatechange = function() {
+	
+			if (this.readyState == 4 && this.status == 200) {
+				document.getElementById("post").innerHTML = "After Post";
+				//this.responseText;
+				var Jinput = JSON.parse(this.responseText);
+				var datastrip = Jinput.result;
+				//console.log("enter is fyn")
+				CreateTableFromJSON(datastrip,'demo2');
+				//console.log("Exit is also is fyn")
+
+			}
+		};
+
+
+		xmlhttp.open("POST", "http://34.209.252.152/star");
+		xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+		//console.log(DB.SELECT('newU'));
+		xmlhttp.send(JSON.stringify(DB.SELECT('newU')));
+		//DB.DROP('newU');
+	}
 	// window.alert = function(msg){
 	//     postDB();
 	// }
@@ -203,67 +226,6 @@
 	// }
 
 	//This is where we should POST the data to the server
-	function postDB()
-	{
-
-		// var table=DB.SELECT( 'my_first_table' );
-
-		var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-
-		xmlhttp.onreadystatechange = function() {
-	
-			if (this.readyState == 4 && this.status == 200) {
-				//document.getElementById("demop").innerHTML =
-				//this.responseText;
-				var Jinput = JSON.parse(this.responseText);
-				var datastrip = Jinput.result;
-				//console.log("enter is fyn")
-				CreateTableFromJSON(datastrip,'demo2');
-				//console.log("Exit is also is fyn")
-
-			}
-		};
-
-
-		xmlhttp.open("POST", "http://34.209.252.152/star");
-		xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-		//console.log(DB.SELECT('newU'));
-		xmlhttp.send(JSON.stringify(DB.SELECT('newU')));
-		//DB.DROP('newU');
-
-
-	}
-	// function cons(){
-	//     console.log("hii");
-	// }
-
-	// function confirmExit(){
-	//     //return postDB();
-	//     return cons();
-	//     //alert("Bye");
-	//     //return "Do you?";
-	// }
-
-	// window.onbeforeunload = confirmExit;
-	// // postDB();
-
-	// setTimeout(function(){
-	//     postDB();
-	//     self.close();
-	// },2000);
-
-	// $(window).bind('beforeunload', function(e){
-	//     if(out)
-	//         {
-	//             postDB();
-	//             for (var i=0;i<10000000000000000000000;i++){
-	//                 // do something unnoticable but time consuming like writing a lot to console
-	//                 console.log('buying some time to finish saving data'); 
-	//             };
-	//         }
-	//     return "hello";
-	// });
-
 </script>
 
 
